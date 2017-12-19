@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
 class Autograph extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.draw = this.draw.bind(this);
     this.state = {
-      a: 7,
-      b: 3,
-      o: 5
+      a: props.a,
+      b: props.b,
+      o: props.o
     };
   }
   draw() {
@@ -47,6 +47,19 @@ class Autograph extends Component {
     } while (!(Math.abs(x1 - xi) < 2 && Math.abs(yi - y1) < 2));
 
     this.ctx.stroke();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(
+      {
+        a: nextProps.a,
+        b: nextProps.b,
+        o: nextProps.o
+      },
+      () => {
+        this.draw();
+      }
+    );
   }
 
   componentDidMount() {
