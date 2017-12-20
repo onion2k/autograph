@@ -8,8 +8,7 @@ class App extends Component {
     super();
     this.state = {
       a: 0,
-      b: 0,
-      o: 0
+      b: 0
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -19,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
+        <div className="controls">
           <input
             type="number"
             name="a"
@@ -32,15 +31,9 @@ class App extends Component {
             value={this.state.b}
             onChange={this.handleChange}
           />
-          <input
-            type="number"
-            name="o"
-            value={this.state.o}
-            onChange={this.handleChange}
-          />
         </div>
-        <div>
-          <Autograph a={this.state.a} b={this.state.b} o={this.state.o} />
+        <div className="output">
+          <Autograph a={this.state.a} b={this.state.b} />
         </div>
       </div>
     );

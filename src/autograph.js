@@ -6,12 +6,20 @@ class Autograph extends Component {
     this.draw = this.draw.bind(this);
     this.state = {
       a: props.a,
-      b: props.b,
-      o: props.o
+      b: props.b
+      // o: props.o
     };
+    this.c = 1;
+    this.d = 0.1;
+
+    this.width = 0;
+    this.height = 0;
   }
   draw() {
-    this.ctx.clearRect(0, 0, 600, 600);
+    if (this.c > 300 || this.c < -300) {
+      this.d = this.d * -1;
+    }
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     this.ctx.lineWidth = 0.75;
     this.ctx.lineJoin = "round";
@@ -20,16 +28,15 @@ class Autograph extends Component {
     let x1 = 0;
     let y1 = 0;
 
-    var width = 600;
-    var height = 600;
-    var cog_a = parseFloat(this.state.a);
-    var cog_b = parseFloat(this.state.b);
-    var i = parseFloat(this.state.o);
+    var cog_a = parseFloat(this.state.a) || 0;
+    var cog_b = parseFloat(this.state.b) || 0;
+    this.c += this.d;
+    var i = this.c;
 
-    var xoffset = width / 2;
-    var yoffset = height / 2;
+    var xoffset = this.width / 2;
+    var yoffset = this.height / 2;
     var ra = i;
-    var rb = width / 2 - i;
+    var rb = this.height / 2 - i;
     var xi = (x1 = ra * Math.cos(cog_a) + rb * Math.cos(cog_b));
     var yi = (y1 = ra * Math.sin(cog_a) + rb * Math.sin(cog_b));
     var ta = cog_a;
@@ -47,14 +54,16 @@ class Autograph extends Component {
     } while (!(Math.abs(x1 - xi) < 2 && Math.abs(yi - y1) < 2));
 
     this.ctx.stroke();
+
+    requestAnimationFrame(this.draw);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState(
       {
         a: nextProps.a,
-        b: nextProps.b,
-        o: nextProps.o
+        b: nextProps.b
+        // o: nextProps.o
       },
       () => {
         this.draw();
@@ -63,6 +72,8 @@ class Autograph extends Component {
   }
 
   componentDidMount() {
+    this.width = this.canvas.clientWidth;
+    this.height = this.canvas.clientHeight;
     this.ctx = this.canvas.getContext("2d");
     this.draw();
   }
@@ -72,8 +83,8 @@ class Autograph extends Component {
         ref={canvas => {
           this.canvas = canvas;
         }}
-        width="600"
-        height="600"
+        width={this.width}
+        height={this.height}
       />
     );
   }
