@@ -10,7 +10,7 @@ class Autograph extends Component {
       // o: props.o
     };
     this.c = 1;
-    this.d = 0.1;
+    this.d = 0.01;
 
     this.width = 0;
     this.height = 0;

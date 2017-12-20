@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Autograph from "./Autograph";
+import Cog from "./Cog";
 
 class App extends Component {
   constructor() {
@@ -19,18 +20,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="controls">
-          <input
-            type="number"
-            name="a"
-            value={this.state.a}
-            onChange={this.handleChange}
-          />
-          <input
-            type="number"
-            name="b"
-            value={this.state.b}
-            onChange={this.handleChange}
-          />
+          <Cog name="a" value={this.state.a} update={this.handleChange} />
+          <Cog name="b" value={this.state.b} update={this.handleChange} />
         </div>
         <div className="output">
           <Autograph a={this.state.a} b={this.state.b} />
