@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Cog.css";
 
 class Cog extends Component {
   constructor() {
@@ -22,19 +23,20 @@ class Cog extends Component {
     if (this.dragging) {
       this.dist = e.clientY - this.start;
       this.props.update({
-        target: { name: this.props.name, value: this.dist }
+        target: { name: this.props.name, value: Math.floor(this.dist / 10) }
       });
     }
   }
 
   render() {
     let style = {
-      transform: "rotate(" + this.dist + "deg)"
+      transform: "rotate(" + this.dist + "deg)",
+      top: (this.props.pos - 1) * 300 + "px"
     };
     return (
       <div>
         <img
-          src="gear.svg"
+          src={"gear" + this.props.pos + ".svg"}
           draggable="false"
           className="Cog"
           onMouseDown={this.mouseDown}
@@ -42,12 +44,6 @@ class Cog extends Component {
           onMouseMove={this.mouseMove}
           alt="Cog"
           style={style}
-        />
-        <input
-          type="number"
-          name={this.props.name}
-          value={this.props.value}
-          onChange={this.props.update}
         />
       </div>
     );

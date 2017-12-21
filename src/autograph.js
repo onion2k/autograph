@@ -3,17 +3,17 @@ import React, { Component } from "react";
 class Autograph extends Component {
   constructor(props) {
     super(props);
-    this.draw = this.draw.bind(this);
     this.state = {
       a: props.a,
       b: props.b
-      // o: props.o
     };
     this.c = 1;
-    this.d = 0.01;
+    this.d = 1;
 
     this.width = 0;
     this.height = 0;
+
+    this.draw = this.draw.bind(this);
   }
   draw() {
     if (this.c > 300 || this.c < -300) {
@@ -58,25 +58,21 @@ class Autograph extends Component {
     requestAnimationFrame(this.draw);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState(
-      {
-        a: nextProps.a,
-        b: nextProps.b
-        // o: nextProps.o
-      },
-      () => {
-        this.draw();
-      }
-    );
-  }
-
   componentDidMount() {
     this.width = this.canvas.clientWidth;
     this.height = this.canvas.clientHeight;
     this.ctx = this.canvas.getContext("2d");
     this.draw();
+    this.forceUpdate();
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      a: nextProps.a,
+      b: nextProps.b
+    });
+  }
+
   render() {
     return (
       <canvas
