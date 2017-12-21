@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import "./Cog.css";
 
 class Cog extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.dragging = false;
     this.start = 0;
-    this.dist = 0;
+    this.dist = props.value * 10;
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
@@ -30,21 +30,20 @@ class Cog extends Component {
 
   render() {
     let style = {
-      transform: "rotate(" + this.dist + "deg)",
-      top: (this.props.pos - 1) * 300 + "px"
+      transform: "rotate(" + this.dist + "deg)"
     };
     return (
-      <div>
-        <img
-          src={"gear" + this.props.pos + ".svg"}
+      <div className="Cog">
+        <div
+          className="metal radial"
           draggable="false"
-          className="Cog"
           onMouseDown={this.mouseDown}
           onMouseUp={this.mouseUp}
           onMouseMove={this.mouseMove}
-          alt="Cog"
           style={style}
-        />
+        >
+          <div className="indicator" />
+        </div>
       </div>
     );
   }

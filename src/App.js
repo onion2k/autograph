@@ -13,6 +13,9 @@ class App extends Component {
       let h = window.location.hash.substr(1).split(",");
       a = parseInt(h[0], 10);
       b = parseInt(h[1], 10);
+    } else {
+      a = Math.round(Math.random() * 10) - 5;
+      b = Math.round(Math.random() * 10) - 5;
     }
     this.state = {
       a: a,
