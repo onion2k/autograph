@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Share+Tech");
+
 .App {
+  font-family: "Share Tech";
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -8,6 +11,33 @@
   flex: 1;
   background-color: #f8f8f8;
   border-right: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.control {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  padding: 30px;
+  border-bottom: 1px solid #000;
+}
+
+.controls > div:last-of-type {
+  border: 0;
+}
+
+button.Auto {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  font-family: "Share Tech";
+  background-color: #e0e0e0;
+}
+
+button.Auto.on {
+  background-color: #a0e0a0;
 }
 
 .output {

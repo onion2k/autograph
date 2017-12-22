@@ -5,7 +5,9 @@ class Autograph extends Component {
     super(props);
     this.state = {
       a: props.a,
-      b: props.b
+      b: props.b,
+      o: props.o,
+      auto: props.auto
     };
     this.c = 1;
     this.d = 1;
@@ -16,8 +18,10 @@ class Autograph extends Component {
     this.draw = this.draw.bind(this);
   }
   draw() {
-    if (this.c > 300 || this.c < -300) {
-      this.d = this.d * -1;
+    if (this.state.auto) {
+      if (this.c > 300 || this.c < -300) {
+        this.d = this.d * -1;
+      }
     }
     this.ctx.clearRect(0, 0, this.width, this.height);
 
@@ -30,8 +34,13 @@ class Autograph extends Component {
 
     var cog_a = parseFloat(this.state.a) || 0;
     var cog_b = parseFloat(this.state.b) || 0;
-    this.c += this.d;
-    var i = this.c;
+    let i;
+    if (this.state.auto) {
+      this.c += this.d;
+      i = this.c;
+    } else {
+      i = this.state.o;
+    }
 
     var xoffset = this.width / 2;
     var yoffset = this.height / 2;
@@ -68,8 +77,10 @@ class Autograph extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      a: nextProps.a,
-      b: nextProps.b
+      a: Math.floor(nextProps.a / 10),
+      b: Math.floor(nextProps.b / 10),
+      o: nextProps.o,
+      auto: nextProps.auto
     });
   }
 

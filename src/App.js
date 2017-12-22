@@ -19,33 +19,54 @@ class App extends Component {
     }
     this.state = {
       a: a,
-      b: b
+      b: b,
+      o: 0,
+      oscillator: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.oscillator = this.oscillator.bind(this);
   }
   handleChange = e => {
-    window.location.hash = this.state.a + "," + this.state.b;
+    window.location.hash =
+      this.state.a + "," + this.state.b + "," + this.state.o;
     this.setState({ [e.target.name]: e.target.value });
   };
+  oscillator() {
+    this.setState({
+      oscillator: !this.state.oscillator
+    });
+  }
   render() {
+    let oscClasses = ["Auto"];
+    if (this.state.oscillator) {
+      oscClasses.push("on");
+    }
     return (
       <div className="App">
         <div className="controls">
-          <Cog
-            name="a"
-            value={this.state.a}
-            update={this.handleChange}
-            pos={1}
-          />
-          <Cog
-            name="b"
-            value={this.state.b}
-            update={this.handleChange}
-            pos={2}
-          />
+          <div className="control">
+            <label>Iterator A</label>
+            <Cog name="a" value={this.state.a} update={this.handleChange} />
+          </div>
+          <div className="control">
+            <label>Iterator B</label>
+            <Cog name="b" value={this.state.b} update={this.handleChange} />
+          </div>
+          <div className="control">
+            <label>Oscillator</label>
+            <Cog name="o" value={this.state.o} update={this.handleChange} />
+            <button className={oscClasses.join(" ")} onClick={this.oscillator}>
+              Auto
+            </button>
+          </div>
         </div>
         <div className="output">
-          <Autograph a={this.state.a} b={this.state.b} />
+          <Autograph
+            a={this.state.a}
+            b={this.state.b}
+            o={this.state.o}
+            auto={this.state.oscillator}
+          />
         </div>
       </div>
     );
