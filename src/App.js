@@ -9,20 +9,24 @@ class App extends Component {
     super();
     let a = 0;
     let b = 0;
+    let o = 0;
     if (window.location.hash !== "") {
       let h = window.location.hash.substr(1).split(",");
-      a = parseInt(h[0], 10);
-      b = parseInt(h[1], 10);
+      a = parseFloat(h[0]);
+      b = parseFloat(h[1]);
+      o = parseFloat(h[2]);
     } else {
       a = Math.round(Math.random() * 10) - 5;
       b = Math.round(Math.random() * 10) - 5;
+      o = Math.round(Math.random() * 10) - 5;
     }
     this.state = {
       a: a,
       b: b,
-      o: 0,
+      o: o,
       oscillator: false
     };
+    console.log(a, b, o);
     this.handleChange = this.handleChange.bind(this);
     this.oscillator = this.oscillator.bind(this);
   }

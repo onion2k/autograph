@@ -4,8 +4,8 @@ class Autograph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      a: props.a,
-      b: props.b,
+      a: Math.floor(props.a / 10),
+      b: Math.floor(props.b / 10),
       o: props.o,
       auto: props.auto
     };
