@@ -20,8 +20,11 @@ class Cog extends Component {
     this.bounds = this.cog.getBoundingClientRect();
   }
   mouseDown(e) {
-    var x = e.clientX - this.bounds.left - this.bounds.width / 2;
-    var y = e.clientY - this.bounds.top - this.bounds.height / 2;
+    let cx = e.clientX || e.touches[0].clientX;
+    let cy = e.clientY || e.touches[0].clientY;
+
+    var x = cx - this.bounds.left - this.bounds.width / 2;
+    var y = cy - this.bounds.top - this.bounds.height / 2;
 
     let a = Math.atan2(y, x);
 
@@ -38,8 +41,11 @@ class Cog extends Component {
   }
   mouseMove(e) {
     if (this.state.dragging) {
-      var x = e.clientX - this.bounds.left - this.bounds.width / 2;
-      var y = e.clientY - this.bounds.top - this.bounds.height / 2;
+      let cx = e.clientX || e.touches[0].clientX;
+      let cy = e.clientY || e.touches[0].clientY;
+
+      var x = cx - this.bounds.left - this.bounds.width / 2;
+      var y = cy - this.bounds.top - this.bounds.height / 2;
 
       let a = Math.atan2(y, x);
 
@@ -76,8 +82,11 @@ class Cog extends Component {
         }}
       >
         <div
-          className="metal radial"
+          className="metal radial notouch"
           draggable="false"
+          onTouchStart={this.mouseDown}
+          onTouchEnd={this.mouseUp}
+          onTouchMove={this.mouseMove}
           onMouseDown={this.mouseDown}
           onMouseOut={this.mouseUp}
           onMouseUp={this.mouseUp}
