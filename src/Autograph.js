@@ -46,12 +46,12 @@ class Autograph extends Component {
     var yoffset = this.height / 2;
     var ra = i;
     var rb = this.height / 2 - i;
-    var xi = (x1 = ra * Math.cos(cog_a) + rb * Math.cos(cog_b));
-    var yi = (y1 = ra * Math.sin(cog_a) + rb * Math.sin(cog_b));
+    var xi = ra * Math.cos(cog_a) + rb * Math.cos(cog_b);
+    var yi = ra * Math.sin(cog_a) + rb * Math.sin(cog_b);
     var ta = cog_a;
     var tb = cog_b;
 
-    this.ctx.moveTo(x1 + xoffset, y1 + yoffset);
+    this.ctx.moveTo(xi + xoffset, yi + yoffset);
 
     do {
       cog_a += ta;
