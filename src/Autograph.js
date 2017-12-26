@@ -19,7 +19,7 @@ class Autograph extends Component {
   }
   draw() {
     if (this.state.auto) {
-      if (this.c > 300 || this.c < -300) {
+      if (this.c > 255 || this.c < -255) {
         this.d = this.d * -1;
       }
     }
@@ -52,6 +52,8 @@ class Autograph extends Component {
     var tb = cog_b;
 
     this.ctx.moveTo(xi + xoffset, yi + yoffset);
+
+    this.ctx.strokeStyle = "hsl(" + Math.abs(this.c) + ",100%,30%)";
 
     do {
       cog_a += ta;
