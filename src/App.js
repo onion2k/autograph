@@ -24,10 +24,11 @@ class App extends Component {
       a: a,
       b: b,
       o: o,
-      oscillator: false
+      oscillator: false,
+      curve: false
     };
-    console.log(a, b, o);
     this.handleChange = this.handleChange.bind(this);
+    this.curve = this.curve.bind(this);
     this.oscillator = this.oscillator.bind(this);
   }
   handleChange = e => {
@@ -35,12 +36,21 @@ class App extends Component {
       this.state.a + "," + this.state.b + "," + this.state.o;
     this.setState({ [e.target.name]: e.target.value });
   };
+  curve() {
+    this.setState({
+      curve: !this.state.curve
+    });
+  }
   oscillator() {
     this.setState({
       oscillator: !this.state.oscillator
     });
   }
   render() {
+    let itaClasses = ["Auto"];
+    if (this.state.curve) {
+      itaClasses.push("on");
+    }
     let oscClasses = ["Auto"];
     if (this.state.oscillator) {
       oscClasses.push("on");
@@ -55,6 +65,9 @@ class App extends Component {
           <div className="control">
             <label>Iterator B</label>
             <Cog name="b" value={this.state.b} update={this.handleChange} />
+            <button className={itaClasses.join(" ")} onClick={this.curve}>
+              Curve
+            </button>
           </div>
           <div className="control">
             <label>Oscillator</label>
@@ -70,6 +83,7 @@ class App extends Component {
             b={this.state.b}
             o={this.state.o}
             auto={this.state.oscillator}
+            curve={this.state.curve}
           />
         </div>
       </div>

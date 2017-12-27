@@ -7,7 +7,8 @@ class Autograph extends Component {
       a: Math.floor(props.a / 10),
       b: Math.floor(props.b / 10),
       o: props.o,
-      auto: props.auto
+      auto: props.auto,
+      curve: props.curve
     };
     this.c = 1;
     this.d = 1;
@@ -61,15 +62,18 @@ class Autograph extends Component {
       x1 = ra * Math.cos(cog_a) + rb * Math.cos(cog_b);
       y1 = ra * Math.sin(cog_a) + rb * Math.sin(cog_b);
 
-      this.ctx.bezierCurveTo(
-        -100 + x1 + xoffset,
-        -200 + y1 + yoffset,
-        200 + x1 + xoffset,
-        100 + y1 + yoffset,
-        x1 + xoffset,
-        y1 + yoffset
-      );
-      //this.ctx.lineTo(x1 + xoffset, y1 + yoffset);
+      if (this.state.curve) {
+        this.ctx.bezierCurveTo(
+          -100 + x1 + xoffset,
+          -200 + y1 + yoffset,
+          200 + x1 + xoffset,
+          100 + y1 + yoffset,
+          x1 + xoffset,
+          y1 + yoffset
+        );
+      } else {
+        this.ctx.lineTo(x1 + xoffset, y1 + yoffset);
+      }
     } while (!(Math.abs(x1 - xi) < 2 && Math.abs(yi - y1) < 2));
 
     this.ctx.stroke();
@@ -90,7 +94,8 @@ class Autograph extends Component {
       a: Math.floor(nextProps.a / 10),
       b: Math.floor(nextProps.b / 10),
       o: nextProps.o,
-      auto: nextProps.auto
+      auto: nextProps.auto,
+      curve: nextProps.curve
     });
   }
 
