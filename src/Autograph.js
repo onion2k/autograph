@@ -61,7 +61,15 @@ class Autograph extends Component {
       x1 = ra * Math.cos(cog_a) + rb * Math.cos(cog_b);
       y1 = ra * Math.sin(cog_a) + rb * Math.sin(cog_b);
 
-      this.ctx.lineTo(x1 + xoffset, y1 + yoffset);
+      this.ctx.bezierCurveTo(
+        -100 + x1 + xoffset,
+        -200 + y1 + yoffset,
+        200 + x1 + xoffset,
+        100 + y1 + yoffset,
+        x1 + xoffset,
+        y1 + yoffset
+      );
+      //this.ctx.lineTo(x1 + xoffset, y1 + yoffset);
     } while (!(Math.abs(x1 - xi) < 2 && Math.abs(yi - y1) < 2));
 
     this.ctx.stroke();
