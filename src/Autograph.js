@@ -64,10 +64,10 @@ class Autograph extends Component {
 
       if (this.state.curve) {
         this.ctx.bezierCurveTo(
-          -100 + x1 + xoffset,
+          -20 + x1 + xoffset,
           -200 + y1 + yoffset,
           200 + x1 + xoffset,
-          100 + y1 + yoffset,
+          20 + y1 + yoffset,
           x1 + xoffset,
           y1 + yoffset
         );
